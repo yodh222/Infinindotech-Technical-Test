@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id');
+            $table->foreignId('product_id');
+            $table->integer('jumlah_dibeli');
+            $table->string('no_faktur', 23);
+            $table->integer('total_harga');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
