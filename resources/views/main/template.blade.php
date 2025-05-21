@@ -88,7 +88,9 @@
 </aside>
 
 <div class="p-3 sm:ml-64">
-    @yield('content')
+    <div class="p-4 mt-14">
+        @yield('content')
+    </div>
 </div>
 
 </body>
