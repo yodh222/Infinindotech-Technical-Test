@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCustomerRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreCustomerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,10 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string'],
+            'no_telp' => ['required', 'string', 'regex:/^08[0-9]{8,11}$/', 'unique:customers,no_telp'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers,email']
         ];
     }
 }
