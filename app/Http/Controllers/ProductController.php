@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -11,9 +12,27 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search  = $request->get('query');
+        $perPage = (int) $request->get('size', 10);
+
+        $query = Product::query();
+
+        if ($search) {
+            $query->where('nama', 'like', "%{$search}%")
+                ->orWhere('harga', 'like', "%{$search}%")
+                ->orWhere('stok', 'like', "%{$search}%");
+        }
+
+        $products = $query
+            ->paginate($perPage)
+            ->appends([
+                'search' => $search,
+                'size'   => $perPage,
+            ]);
+
+        return view('pages.product', compact('products', 'search', 'perPage'));
     }
 
     /**
@@ -29,7 +48,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $product = Product::create($validated);
+
+        return redirect()->route('products.index')
+            ->with('success', "Product “{$product->nama}” berhasil ditambahkan.");
     }
 
     /**
@@ -53,7 +76,11 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $validated = $request->validated();
+
+        $product->update($validated);
+
+        return redirect()->route('products.index')->with('success', "Data produk berhasil diperbarui.");
     }
 
     /**
@@ -61,6 +88,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::destroy($product->id);
+
+        return redirect()->back()->with('success', "Product berhasil dihapus.");
     }
 }

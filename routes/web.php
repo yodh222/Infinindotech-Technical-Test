@@ -1,12 +1,9 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\Customer;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 require __DIR__ . '/auth.php';
 
@@ -17,4 +14,5 @@ Route::group([
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/customers', CustomerController::class);
+    Route::resource('/products', ProductController::class);
 });
