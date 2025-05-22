@@ -137,7 +137,7 @@
                                 {{ $order["tanggal"] }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#" class="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Details</a>
+                                <a href="{{ route('invoice', $order['no_faktur']) }}" target="_blank" class="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Details</a>
                             </td>
                         </tr>
                     @endforeach

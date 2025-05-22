@@ -17,4 +17,5 @@ Route::group([
     Route::resource('/customers', CustomerController::class);
     Route::resource('/products', ProductController::class);
     Route::resource('/orders', OrderController::class);
+    Route::get('/orders/invoice/{no_faktur}', [OrderController::class, 'invoice'])->name('invoice');
 });

@@ -164,4 +164,13 @@ class OrderController extends Controller
         Order::where('no_faktur', $order->no_faktur)->delete();
         return redirect()->back()->with('success', "Semua pesanan dengan No Faktur {$order->no_faktur} berhasil dihapus.");
     }
+
+    public function invoice(string $no_faktur)
+    {
+        $orders = Order::with('product', 'customer')
+            ->where('no_faktur', $no_faktur)
+            ->get();
+
+        return view('pages.invoice', compact('orders'));
+    }
 }
