@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -15,3 +16,7 @@ Route::group([
     })->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('post.login');
 });
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('login');
+})->middleware('auth')->name('logout');
