@@ -36,6 +36,6 @@ class DashboardController extends Controller
             ];
         })->sortByDesc(fn($item) => $item['created_at']->timestamp)->take(10);
         $products = Product::all();
-        return view('pages.dashboard', ['customers' => $customers, 'orders' => $orders, 'products' => $products]);
+        return view('pages.dashboard', ['customers' => $customers, 'orders' => $orders, 'products' => $products, 'orders2' => Order::all()]);
     }
 }

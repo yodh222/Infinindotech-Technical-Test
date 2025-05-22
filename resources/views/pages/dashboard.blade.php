@@ -37,7 +37,7 @@
     </x-card>
     <x-card
         title=""
-        stat="{{ $orders->count() }}"
+        stat="{{ $orders2->groupBy('no_faktur')->count() }}"
         unit="Pesanan">
             <x-slot:icon>
                 <div class="p-3 rounded-lg bg-cyan-100 dark:bg-cyan-900/20 text-cyan-600 dark:text-cyan-400">
