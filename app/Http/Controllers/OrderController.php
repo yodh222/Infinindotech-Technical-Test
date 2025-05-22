@@ -74,15 +74,6 @@ class OrderController extends Controller
         return view('pages.order', compact('paginatedOrders', 'search', 'perPage', 'customers', 'products'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -125,29 +116,13 @@ class OrderController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Order $order)
     {
         $no_faktur = $order->no_faktur;
 
-        $orders = Order::where('no_faktur', $no_faktur)->update(['status' => 'Lunas']);
+        Order::where('no_faktur', $no_faktur)->update(['status' => 'Lunas']);
         return redirect()->route('orders.index')->with('success', 'Status pesanan berhasil diperbarui.');
     }
 
