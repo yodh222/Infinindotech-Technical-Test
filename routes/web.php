@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 
 require __DIR__ . '/auth.php';
 
@@ -15,4 +16,5 @@ Route::group([
 
     Route::resource('/customers', CustomerController::class);
     Route::resource('/products', ProductController::class);
+    Route::resource('/orders', OrderController::class);
 });
